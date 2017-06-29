@@ -3,14 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>suifengfengye的博客</title>
+  <title>React入门 | suifengfengye的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="suifengfengye的博客">
-<meta property="og:url" content="http://suifengfengye.github.io/index.html">
+  <meta name="description" content="React learnReactReact is a javascript library for building user interface. A Simple ComponentReact components implement a  render()  method that takes input data and return what to display.Input data">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React入门">
+<meta property="og:url" content="http://suifengfengye.github.io/2017/06/23/React-start/index.html">
 <meta property="og:site_name" content="suifengfengye的博客">
+<meta property="og:description" content="React learnReactReact is a javascript library for building user interface. A Simple ComponentReact components implement a  render()  method that takes input data and return what to display.Input data">
+<meta property="og:updated_time" content="2017-06-29T03:26:35.206Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="suifengfengye的博客">
+<meta name="twitter:title" content="React入门">
+<meta name="twitter:description" content="React learnReactReact is a javascript library for building user interface. A Simple ComponentReact components implement a  render()  method that takes input data and return what to display.Input data">
   
     <link rel="alternate" href="/atom.xml" title="suifengfengye的博客" type="application/atom+xml">
   
@@ -59,91 +63,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-React-MarkdownEditor" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/06/29/React-MarkdownEditor/" class="article-date">
-  <time datetime="2017-06-29T06:37:02.000Z" itemprop="datePublished">2017-06-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/29/React-MarkdownEditor/">markdown编辑器(React)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>dangerouslySetInnerHTML</em> is React’s replacement for using innerHTML in the browser DOM.<br>You can set HTML directly from React, but you have to type out <em>dangerouslySetInnerHTML</em> and pass an object with a <em>__html</em> key, to remind yourself that is dangerous.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">class MarkdownEditor extends React.Component &#123;</div><div class="line">  constructor () &#123;</div><div class="line">    super();</div><div class="line">    this.state = &#123;</div><div class="line">      text: &apos;&apos;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">  render () &#123;</div><div class="line">    return (</div><div class="line">      &lt;div className=&quot;markdown-editor&quot;&gt;</div><div class="line">        &lt;p&gt;Input&lt;/p&gt;</div><div class="line">        &lt;textarea onChange=&#123;(e) =&gt; &#123;this.handleChange(e)&#125;&#125;&gt;&lt;/textarea&gt;</div><div class="line">        &lt;p&gt;Output&lt;/p&gt;</div><div class="line">        &lt;div dangerouslySetInnerHTML=&#123;this.getRawMarkup()&#125;&gt;&lt;/div&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">  handleChange (e) &#123;</div><div class="line">    this.setState(&#123;</div><div class="line">      text: e.target.value</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  getRawMarkup () &#123;</div><div class="line">    const md = new Remarkable();</div><div class="line">    return &#123; __html: md.render(this.state.text) &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">  &lt;MarkdownEditor /&gt;,</div><div class="line">  document.getElementById(&apos;root&apos;)</div><div class="line">);</div></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://suifengfengye.github.io/2017/06/29/React-MarkdownEditor/" data-id="cj4i28s0w0000pcqtk1ezlya2" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/06/23/hello-world/" class="article-date">
-  <time datetime="2017-06-23T09:55:20.921Z" itemprop="datePublished">2017-06-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/23/hello-world/">hexo的简单使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://suifengfengye.github.io/2017/06/23/hello-world/" data-id="cj4i28s180002pcqtdhj640bh" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-React-start" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-React-start" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/06/23/React-start/" class="article-date">
   <time datetime="2017-06-23T09:13:02.000Z" itemprop="datePublished">2017-06-23</time>
@@ -156,8 +76,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/23/React-start/">React入门</a>
+    <h1 class="article-title" itemprop="name">
+      React入门
     </h1>
   
 
@@ -182,51 +102,28 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-我的第一篇博客文章" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/06/23/我的第一篇博客文章/" class="article-date">
-  <time datetime="2017-06-23T09:13:02.000Z" itemprop="datePublished">2017-06-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2017/06/23/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
+          hexo的简单使用
+        
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/23/我的第一篇博客文章/">我的第一篇博客文章</a>
-    </h1>
   
+    <a href="/2017/06/23/我的第一篇博客文章/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">我的第一篇博客文章</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1、git提交"><a href="#1、git提交" class="headerlink" title="1、git提交"></a>1、git提交</h1><p>$git add -u //只提交修改过的文件<br>$git add -A //全部提交<br>$git add -p //对同一个文件进行选择性的提交</p>
-<h1 id="2、diff"><a href="#2、diff" class="headerlink" title="2、diff"></a>2、diff</h1><p>$git diff<br>如果已经git add过，需要加–cached才可以看到</p>
-<h1 id="3、保存工作进度"><a href="#3、保存工作进度" class="headerlink" title="3、保存工作进度"></a>3、保存工作进度</h1><p>$git stash<br>$git checkout <new_branch><br>完成后：<br>$git checkout <origin_branch><br>$git stash pop</origin_branch></new_branch></p>
-<h1 id="4、代理svn"><a href="#4、代理svn" class="headerlink" title="4、代理svn"></a>4、代理svn</h1><p>$git svn clone <svn_repos_url><br>$git svn fetch<br>$git svn rebase<br>$git svn dcommit</svn_repos_url></p>
-<h1 id="5、分页器"><a href="#5、分页器" class="headerlink" title="5、分页器"></a>5、分页器</h1><p>快捷键<br>q - 退出分页器<br>h - 显示分页器帮助<br>空格 - 下翻一页，b - 上翻一页<br>d - 下翻半页，u - 上翻半页<br>j - 上翻一行，k - 下翻一行<br>左右箭头<br>/pattern: 向下寻找和pattern匹配的内容<br>?pattern:向上寻找和pattern匹配的内容<br>n/N: 向前/向后继续寻找。<br>g - 跳到第一行；<br>G - 跳到最后一行。<br>g + 数字： 跳到相应的行。<br>!<command> : 执行Shell命令。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://suifengfengye.github.io/2017/06/23/我的第一篇博客文章/" data-id="cj4i28s1j0003pcqtgmfk1i0x" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
 
 </section>
         

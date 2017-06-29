@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>markdown编辑器(React) | suifengfengye的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="dangerouslySetInnerHTML is React’s replacement for using innerHTML in the browser DOM.You can set HTML directly from React, but you have to type out dangerouslySetInnerHTML and pass an object with a _">
+<meta property="og:type" content="article">
+<meta property="og:title" content="markdown编辑器(React)">
+<meta property="og:url" content="http://suifengfengye.github.io/2017/06/29/React-MarkdownEditor/index.html">
+<meta property="og:site_name" content="suifengfengye的博客">
+<meta property="og:description" content="dangerouslySetInnerHTML is React’s replacement for using innerHTML in the browser DOM.You can set HTML directly from React, but you have to type out dangerouslySetInnerHTML and pass an object with a _">
+<meta property="og:updated_time" content="2017-06-29T06:38:25.253Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="markdown编辑器(React)">
+<meta name="twitter:description" content="dangerouslySetInnerHTML is React’s replacement for using innerHTML in the browser DOM.You can set HTML directly from React, but you have to type out dangerouslySetInnerHTML and pass an object with a _">
+  
+    <link rel="alternate" href="/atom.xml" title="suifengfengye的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">suifengfengye的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://suifengfengye.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-React-MarkdownEditor" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/29/React-MarkdownEditor/" class="article-date">
+  <time datetime="2017-06-29T06:37:02.000Z" itemprop="datePublished">2017-06-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      markdown编辑器(React)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><em>dangerouslySetInnerHTML</em> is React’s replacement for using innerHTML in the browser DOM.<br>You can set HTML directly from React, but you have to type out <em>dangerouslySetInnerHTML</em> and pass an object with a <em>__html</em> key, to remind yourself that is dangerous.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">class MarkdownEditor extends React.Component &#123;</div><div class="line">  constructor () &#123;</div><div class="line">    super();</div><div class="line">    this.state = &#123;</div><div class="line">      text: &apos;&apos;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">  render () &#123;</div><div class="line">    return (</div><div class="line">      &lt;div className=&quot;markdown-editor&quot;&gt;</div><div class="line">        &lt;p&gt;Input&lt;/p&gt;</div><div class="line">        &lt;textarea onChange=&#123;(e) =&gt; &#123;this.handleChange(e)&#125;&#125;&gt;&lt;/textarea&gt;</div><div class="line">        &lt;p&gt;Output&lt;/p&gt;</div><div class="line">        &lt;div dangerouslySetInnerHTML=&#123;this.getRawMarkup()&#125;&gt;&lt;/div&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">  handleChange (e) &#123;</div><div class="line">    this.setState(&#123;</div><div class="line">      text: e.target.value</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  getRawMarkup () &#123;</div><div class="line">    const md = new Remarkable();</div><div class="line">    return &#123; __html: md.render(this.state.text) &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">  &lt;MarkdownEditor /&gt;,</div><div class="line">  document.getElementById(&apos;root&apos;)</div><div class="line">);</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://suifengfengye.github.io/2017/06/29/React-MarkdownEditor/" data-id="cj4i28s0w0000pcqtk1ezlya2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/06/23/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hexo的简单使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/06/29/React-MarkdownEditor/">markdown编辑器(React)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/23/hello-world/">hexo的简单使用</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/23/React-start/">React入门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/23/我的第一篇博客文章/">我的第一篇博客文章</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 jianfeng_huang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
