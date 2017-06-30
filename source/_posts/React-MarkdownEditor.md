@@ -7,6 +7,8 @@ tag:
 *dangerouslySetInnerHTML* is React's replacement for using innerHTML in the browser DOM.
 You can set HTML directly from React, but you have to type out *dangerouslySetInnerHTML* and pass an object with a *__html* key, to remind yourself that is dangerous.
 
+[codepen地址](https://codepen.io/suifengfengye/pen/MorPBY)
+
 ```
 class MarkdownEditor extends React.Component {
   constructor () {

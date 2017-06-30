@@ -33,6 +33,8 @@ ReactDOM.render(
 In addition to taking input data, a component can maintain internal state data (accessed via this.state).
 When component's state data changes, the rendered markup will be updated by re-invoking * render() *.
 
+[codepen地址](https://codepen.io/suifengfengye/pen/pwpxvG)
+
 ```
 
 class Timer extends React.Component {
@@ -88,6 +90,8 @@ ReactDOM.render(
 # A Application
 
 Using props and state, we can put together a small Todo application.
+
+[codepen地址](https://codepen.io/suifengfengye/pen/gRoBpX)
 
 ```javascript
 
