@@ -1,2 +1,0 @@
-# ftry-blog
-my-blog
