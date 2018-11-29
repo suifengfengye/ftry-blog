@@ -1,0 +1,61 @@
+# Logo
+logo_image_source: http://www.codeblocq.com/assets/projects/hexo-theme-anodyne/assets/anodyne.svg
+
+# Index Page
+index_banner_text: 欢迎来到我的博客
+index_banner_text_secondary: 做人如果没有梦想，那和咸鱼有什么区别。
+index_font_awesome_icon_css: fa fa-magic
+
+# Header
+menu:
+  主页: /
+  列表: /archives
+  标签: /tags
+  分类: /categories
+  关于: /about.html
+  联系方式: /contact.html
+
+# Post
+default_post_title: Untitled
+default_post_icon: fa-file-text-o
+
+# Archive Date Format
+archive_date_format: MMM YYYY
+archive_font_awesome_icon_css: fa-folder-open
+
+# About Widget
+about_widget_avatar_url: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543393359754&di=98b179b898c6079686c30465812d3c54&imgtype=0&src=http%3A%2F%2Fimg3.kuwo.cn%2Fstar%2Fuserhead%2F49%2F84%2F1473703627587_232693149.jpg
+about_widget_text: "这是我的个人博客.testing<br>"
+
+
+# Comments.
+comments:
+  # Disqus comments
+  disqus_shortname: 
+
+# Google Analytics Tracking ID
+google_analytics:
+
+# Social Media Platforms
+social_platforms:
+  - url: https://twitter.com/?lang=en
+    fa_icon: fa-twitter
+  - url: https://www.facebook.com/
+    fa_icon: fa-facebook
+  - url: https://dribbble.com/
+    fa_icon: fa-dribbble 
+  - url: https://github.com/klugjo/hexo-theme-anodyne
+    fa_icon: fa-github
+  - url: https://plus.google.com/
+    fa_icon: fa-google-plus
+  - url: https://www.behance.net/
+    fa_icon: fa-behance
+  - url: https://500px.com/
+    fa_icon: fa-500px
+  - url: mailto:test@example.com
+    fa_icon: fa-envelope
+  - url: /#
+    fa_icon: fa-rss
+
+# Footer about
+footer_about: "@Untitled. All right reserved | Design & Hexo <a class=\"link dim white\" href=\"http://www.codeblocq.com/\">Jonathan Klughertz</a>"
