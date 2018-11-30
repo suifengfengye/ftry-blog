@@ -1,7 +1,8 @@
 ---
 title: d3 树图、封闭图
 date: 2018-11-28 13:28:54
-tags:
+tags: ["d3", "charts"]
+icon: fa-handshake-o
 ---
 # 1、树图
 

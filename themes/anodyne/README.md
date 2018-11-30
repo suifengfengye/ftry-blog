@@ -63,7 +63,8 @@ Example:
 
 ``` yaml
 title: Welcome to Anodyne
-tags: ["ThisIsATag", "Intro", "Welcome", "Anodyne"]
+# tags: ["ThisIsATag", "Intro", "Welcome", "Anodyne"]
+tags: []
 categories: ["Configuration", "Hexo"]
 icon: fa-handshake-o
 ---
