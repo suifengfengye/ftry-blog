@@ -85,6 +85,8 @@ function visibilityFilter(state = 'SHOW_ALL', action) {
 
 在这里，参数state=[]的写法为es6语法，表明将state初始化为一个空数组。reducer的返回值组成了应用的状态（即"总state",下面写到"应用的状态"的时候指的就是"总state"）。每一次调用reducer，参数state(即"子state"，"子state"构成了"总state")的值为对应reducer对应状态的上一个值，该reducer的返回值又将更新到应用的状态中。如果是第一次调用reducer，参数state则为初始值。参数action则是上面介绍的一个带有type属性的普通javascript对象。
 
+我们来细看visibilityFilter函数的逻辑，它使用switch语句，根据action.type来区分处理不同的action。如果action.type等于'SET_VISIBILITY_FILTER',它将action.filter返回，作为这个"子state"的新值；如果action.type不等于'SET_VISIBILITY_FILTER'，则将state原样返回，不做处理。
+
 如果仅有一个reducer，那么这个reducer的返回值就是应用的状态。不过在一般的应用中，为了便于阅读和维护，都会有多个reducer。然后再通过redux提供的全局方法 combineReducers 将reducer组合起来，构成最终的应用状态。combineReducers函数接收一个Object对象参数，该对象的key值可以设置任意多个，key值对应的value值为一个reducer。
 
 {% codeblock %}
@@ -190,4 +192,9 @@ store.dispatch(setVisibilityFilter('SHOW_COMPLETED'))
 
 {% endcodeblock %}
 
-{% asset_img ./result-20181213.png %}
+## 4、把代码跑起来
+
+上面的样例代码包含3个文件: actions.js、reducers.js以及index.js。样例代码依赖于redux npm包，并使用了一些es6语法，想要把代码跑起来，我们使用webpack对这几个文件进行打包处理，让它成为浏览器可加载解析的文件。具体请参考{% link redux-01 https://github.com/Two-Ftry/react-essay/tree/master/redux-01 %}，里面对构建步骤进行了详细的说明。
+
+
+{% asset_img ./redux/result-20181213.png %}
