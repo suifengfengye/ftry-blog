@@ -29,6 +29,16 @@ tags:
 
 ## 1、工程初始化
 
+既然是作为一个基础功能，我们就将项目名称命名为"todo-base"。在任何一个目录下创建"todo-base"目录，执行如下操作:
+
+{% codeblock %}
+> cd todo-base
+# 初始化工程，按照步骤一步步填写
+> npm init 
+{% endcodeblock %}
+
+目前我们已经建好了
+
 
 ## 2、+ webpack
 
