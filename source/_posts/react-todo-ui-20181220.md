@@ -1,5 +1,5 @@
 ---
-title: "待办事项"项目UI实现
+title: 待办事项项目UI实现
 date: 2018-12-20 13:32:47
 tags:
 ---
@@ -37,10 +37,49 @@ tags:
 > npm init 
 {% endcodeblock %}
 
-目前我们已经建好了
+npm init 执行完成了之后，目录下面就会有 package.json文件，该文件是什么？？
+我们的项目中，会有源代码文件，也会有编译出来的代码文件供发布线上。在项目根目录下创建"src"和"dist"两个目录，分别放置源代码文件和编译出来的代码文件。
 
+{% codeblock %}
+- dist
+- src
+package.json
+{% endcodeblock %}
+
+接着，我们在src目录下创建我们的第一个js文件(index.js)，一个简单的npm项目架子就完成了。
+
+{% codeblock %}
+// index.js
+document.write('Hello World!')
+{% endcodeblock %}
+
+### 1.1 让项目跑起来
+既然说简单的项目已经成型，那怎样让"Hello World!"的字样能够在浏览器中显示呢？我们在dist目录下创建index.html文件，添加基础的html代码，然后引入"index.js"文件。
+
+{% codeblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script src="../src/index.js"></script>
+</body>
+</html>
+{% endcodeblock %}
+
+我们用浏览器打开index.html，就可以看到"Hello World!"的字样啦。
+
+早先的web前端开发，就是这样的方式来进行的。只不过后来逐渐有了自动化打包的工具，这些步骤都通过打包实现了。后面将会看到我们是如何使用webpack将这个过程自动化的。
 
 ## 2、+ webpack
+
+上一节中，我们在index.html中通过script标签，引入src/index.js，引入的是源文件。源文件直接引入到html当中，有几个方面的缺点：
+
+1. 需要自己通过script标签手动引入js文件，不太灵活
+2. 这样子引入的js文件，不能使用一些新的ES6、ES7特性，因为有些浏览器并不支持这些特性；
+3. 
 
 ## 3、+ react
 
