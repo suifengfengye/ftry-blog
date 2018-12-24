@@ -84,9 +84,12 @@ document.write('Hello World!')
 
 一般来说，现在的前端开发都会使用像webpack、gulp等这些打包工具。本文我们使用webpack来处理js文件，并自动打包输出到dist目录中，并添加上混淆压缩的功能。
 
-webpack中有两个基本的概念："输入"(entry)、"输出"(output)。webpack会根据入口的配置，逐步解析各个资源文件（包括js文件、css文件、图片等）形成一个依赖图。依赖图中的每个依赖项都会被处理，然后根据出口（output）的配置输出到对应的地方。在我们的例子中，入口文件就是index.js，输出到"dist"目录下，所以简单配置如下：
+### 2.1 webpack简单配置
+
+webpack中有两个基本的概念："输入"(entry)、"输出"(output)。webpack会根据入口的配置，逐步解析各个资源文件（包括js文件、css文件、图片等）形成一个依赖图。依赖图中的每个依赖项都会被处理，然后根据出口（output）的配置输出到对应的文件中。在我们的例子中，入口文件就是index.js，输出到"dist"目录下，所以webpack简单配置如下(在项目根目录下创建webpack.config.js文件)：
 
 {% codeblock %}
+// webpack.config.js
 const path = require('path')
 module.exports = {
     entry: {
@@ -94,11 +97,64 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './dist'),
-        filename: '[name].js', // 这里[name]
+        filename: '[name].js', // 这里[name]就对应entry中的‘app’key值
     }
 }
 {% endcodeblock %}
 
+当然我们要为项目添加webpack的npm包才能使用webpack来对文件进行打包处理。在命令行中输入：
+
+{% codeblock %}
+// 确保当前处于项目根目录下再输入如下命令
+> npm install -D webpack webpack-cli
+{% endcodeblock %}
+
+当依赖包安装完成之后，我们就可以使用webpack进行打包了，使用命令行工具，输入如下命令：
+
+{% codeblock %}
+// 确保当前处于项目根目录下再输入如下命令
+> webpack
+{% endcodeblock %}
+
+待webpack之行完成，我们会在dist目录下看到"app.js"文件对输出。
+
+到此我们来看看解决来本节开篇所列问题对几个？貌似一个都没有解决！我们只是使用webpack对入口文件进行了简单的打包输出。但是不要泄气，只要使用了webpack，我们再来添加一些配置，上面的问题就可以得到解决。
+
+### 2.2 使用webpack来解决问题
+
+1 避免手动引入js文件
+
+在前面的例子中js文件是通过script标签引入到html中使用的。而上一小节，我们通过webpack已经能将js文件打包输出。如果html文件也能通过webpack输出，那么是不是打包出来的js文件就能自动的引入到html文件中呢（毕竟webpack的输出配置是我们手动配置的）？答案是可以的。
+
+此时，我们需要了解webpack的另一个概念"plugin"。plugin是对webpack功能对增强，让webpack能够做更多对事情。要让webpack能够输出html文件，我们需要使用到"html-webpack-plugin"。
+
+首先，我们来安装“html-webpack-plugin”的npm依赖包。
+
+{% codeblock %}
+> npm install -D html-webpack-plugin
+{% endcodeblock %}
+
+接着修改webpack.config.js的配置：
+
+{% codeblock %}
+// webpack.config.js
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+module.exports = {
+    entry: {
+        app: './src/index', // "app"key值可以随便定义，输出的时候就可以取这个key值为输出文件命名
+    },
+    output: {
+        path: path.resolve(__dirname, './dist'),
+        filename: '[name].js', // 这里[name]就对应entry中的‘app’key值
+    },
+    plugins: [
+        nwe HtmlWebpackPlugin()
+    ]
+}
+{% endcodeblock %}
+
+（2）
 
 ## 3、+ react
 
