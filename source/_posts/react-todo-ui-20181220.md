@@ -77,10 +77,27 @@ document.write('Hello World!')
 
 上一节中，我们在index.html中通过script标签，引入src/index.js，引入的是源文件。源文件直接引入到html当中，有几个方面的缺点：
 
-1. 需要自己通过script标签手动引入js文件，不太灵活
-2. 这样子引入的js文件，不能使用一些新的ES6、ES7特性，因为有些浏览器并不支持这些特性；
-3. 
+1. 需要自己通过script标签手动引入js文件，不太灵活;
+2. 这样引入的js文件，不能使用一些新的ES6、ES7特性，因为有些浏览器并不支持这些特性；
+3. script引入的js文件，还需要处理缓存的问题；
+4. 想要对js文件进行混淆压缩也不方便。
 
+一般来说，现在的前端开发都会使用像webpack、gulp等这些打包工具。本文我们使用webpack来处理js文件，并自动打包输出到dist目录中，并添加上混淆压缩的功能。
+
+webpack中有两个基本的概念："输入"(entry)、"输出"(output)。webpack会根据入口的配置，逐步解析各个资源文件（包括js文件、css文件、图片等）形成一个依赖图。依赖图中的每个依赖项都会被处理，然后根据出口（output）的配置输出到对应的地方。在我们的例子中，入口文件就是index.js，输出到"dist"目录下，所以简单配置如下：
+
+{% codeblock %}
+const path = require('path')
+module.exports = {
+    entry: {
+        app: './src/index', // "app"key值可以随便定义，输出的时候就可以取这个key值为输出文件命名
+    },
+    output: {
+        path: path.resolve(__dirname, './dist'),
+        filename: '[name].js', // 这里[name]
+    }
+}
+{% endcodeblock %}
 
 
 ## 3、+ react
