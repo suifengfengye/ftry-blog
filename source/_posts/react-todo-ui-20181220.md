@@ -122,7 +122,7 @@ module.exports = {
 
 ### 2.2 使用webpack来解决问题
 
-1 避免手动引入js文件&解决缓存问题
+（1） 避免手动引入js文件&解决缓存问题
 
 在前面的例子中js文件是通过script标签引入到html中使用的。而上一小节，我们通过webpack已经能将js文件打包输出。如果html文件也能通过webpack输出，那么是不是打包出来的js文件就能自动的引入到html文件中呢（毕竟webpack的输出配置是我们手动配置的）？答案是可以的。
 
@@ -149,7 +149,7 @@ module.exports = {
         filename: '[name].[chunkhash].js', // 这里[name]就对应entry中的‘app’key值
     },
     plugins: [
-        nwe HtmlWebpackPlugin()
+        new HtmlWebpackPlugin()
     ]
 }
 {% endcodeblock %}
@@ -198,11 +198,84 @@ module.exports = {
 
 这个配置告诉babel调用“@babel/preset-react”来支持react的语法。
 
+### 2.3 开发环境支持
+
+接着2.1和2.2节的配置，我们已经使用上了webpack对文件进行打包处理。但是我们在代码中是会使用到ES6、ES7的一些特性，在开发的时候，需要babel实时对代码进行编译输出才能看到开发的功能是否有问题。并且我们也不可能，开发一会，想看效果了然后webpack编译一下再用浏览器看结果，这样效率就太低了。
+
+为了能实时能看到我们开发的功能，我们需要在本地起一个web服务，然后使用webpack监控文件的变化，当文件发生变化时立即执行webpack进行代码编译输出，发布到web服务上，这样我们在浏览器访问这个web服务的地址就能实时看到结果了。而这些，都可以通过webpack的devServer配置项来实现。看下面的配置：
+
+{% codeblock %}
+// webpack.config.js
+module.exports = {
+    // ...
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'), // web服务的目录为 "dist" 目录
+        port: 9000 // web服务端口
+    }
+}
+{% endcodeblock %}
+
+配置好之后，如何启动devServer呢？首先，我们需要要安装"webpack-dev-server"这个npm包。
+
+{% codeblock %}
+// 确保当前处于项目根目录下再输入如下命令
+> npm install -D webpack-dev-server
+{% endcodeblock %}
+
+"webpack-dev-server"安装好之后，我们在命令行工具中输入"webpack-dev-server"即可启动服务了。
+
+{% codeblock %}
+// 确保当前处于项目根目录下再输入如下命令
+> webpack-dev-server
+{% endcodeblock %}
+
+web服务启动之后，在浏览器打开 "http://localhost:9000" 就可以看到"Hello World"字样了。
+
 ## 3、+ react
+
+在上一节，我们已经使用webpack将环境搭好了，接着我们就来添加react的代码。然后将"待办事项"的UI实现出来。我们先来安装react的依赖包。
+
+{% codeblock %}
+> npm install -D react react-dom
+{% endcodeblock %}
+
+在index.js中加入如下代码:
+
+{% codeblock %}
+// ./src/index.js
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+import App from './app'
+
+ReactDOM.render(
+    <App />, 
+    document.getElementsByTagName('BODY')[0],
+)
+{% endcodeblock %}
+
+index.js是入口文件，会在body标签下渲染react组件<App />。组件App的代码如下（我们先搭一个架子）：
+
+{% codeblock %}
+import React, { Component } from 'react';
+class App extends Component {
+    render() {
+        return (
+            <div>{'todo app'}</div>
+        )
+    }
+}
+export default App
+{% endcodeblock %}
 
 ## 4、待办事项实现
 
 ### 4.1 添加待办事项UI
+
+{% codeblock %}
+// AddTodo.js
+
+{% endcodeblock %}
 
 ### 4.2 待办事项列表UI
 
