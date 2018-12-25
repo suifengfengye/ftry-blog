@@ -122,11 +122,11 @@ module.exports = {
 
 ### 2.2 使用webpack来解决问题
 
-1 避免手动引入js文件
+1 避免手动引入js文件&解决缓存问题
 
 在前面的例子中js文件是通过script标签引入到html中使用的。而上一小节，我们通过webpack已经能将js文件打包输出。如果html文件也能通过webpack输出，那么是不是打包出来的js文件就能自动的引入到html文件中呢（毕竟webpack的输出配置是我们手动配置的）？答案是可以的。
 
-此时，我们需要了解webpack的另一个概念"plugin"。plugin是对webpack功能对增强，让webpack能够做更多对事情。要让webpack能够输出html文件，我们需要使用到"html-webpack-plugin"。
+此时，我们需要了解webpack的另一个概念"plugin"。plugin是对webpack功能的增强，让webpack能够做更多的事情。要让webpack能够输出html文件，我们需要使用到"html-webpack-plugin"。
 
 首先，我们来安装“html-webpack-plugin”的npm依赖包。
 
@@ -146,7 +146,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './dist'),
-        filename: '[name].js', // 这里[name]就对应entry中的‘app’key值
+        filename: '[name].[chunkhash].js', // 这里[name]就对应entry中的‘app’key值
     },
     plugins: [
         nwe HtmlWebpackPlugin()
@@ -154,7 +154,49 @@ module.exports = {
 }
 {% endcodeblock %}
 
-（2）
+如上面的配置，除了添加plugins的配置外，还对output的filename配置改成了"[name].[chunkhash].js",这里chunkhash是基于内容的hash值，每当js源文件的内容发生改变时，chunkhash值也随之改变，这就可以解决引入js文件的缓存问题了。
+
+（2）支持es6、es7特性
+
+要让我们的代码支持es6、es7新特性。需要使用到webpack的loader功能，而能将es6、es7语法转换成浏览器支持到语法，就是"babel-loader"。要使用babel，我们需要线安装
+
+- babel : babel库
+- babel-loader：webpack用来加载babel的库
+- @babel/core：babel库的核心
+- @babel/preset-react：支持react的语法
+
+{% codeblock %}
+> npm insall -D babel babel-loader @babel/core @babel/preset-react
+{% endcodeblock %}
+
+在webpack.config.js中添加配置：
+
+{% codeblock %}
+module.exports = {
+    //...
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                use: 'babel-loader',
+            }
+        ]
+    }
+}
+{% endcodeblock%}
+
+这个配置告诉webpack，当加载js文件时，使用babel-loader进行转换。而babel-loader会调用babel来实现转换。
+
+不过上面的配置，仅仅使用了babel的核心功能，要让webpack支持更多的babel提供的功能，需要在项目根目录下创建babel的配置文件".babelrc"。然后往这个文件里面添加如下内容：
+
+{% codeblock %}
+// .babelrc
+{
+    "presets": ["@babel/preset-react"]
+}
+{% endcodeblock %}
+
+这个配置告诉babel调用“@babel/preset-react”来支持react的语法。
 
 ## 3、+ react
 
