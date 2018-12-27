@@ -270,16 +270,173 @@ export default App
 
 ## 4、待办事项实现
 
+待办事项的UI分为三个部分：添加待办事项、待办事项列表、待办事项过滤条件。下面我们一个部分一个部分来实现，然后再组合起来。
+
 ### 4.1 添加待办事项UI
 
-{% codeblock %}
-// AddTodo.js
+待办事项的添加，我们只需要一个input输入框和一个添加的按钮。我們使用函数定义组件来实现：
 
+{% codeblock %}
+// src/AddTodo.js
+import React from 'react';
+
+const AddTodo = () => {
+    return (
+        <div>
+            <input type="text" />
+            <button type="button">Add</button>
+        </div>
+    )
+}
+
+export default AddTodo
 {% endcodeblock %}
 
 ### 4.2 待办事项列表UI
 
+待办事项的列表，由列表项构成。所以这里拆分成Todo.js和TodoList.js两个文件。
+
+{% codeblock %}
+// src/Todo.js
+const Todo = ({ onClick, completed, text }) => {
+    const style = {textDecoration: completed ? 'line-through' : 'none'}
+    return (
+    <li
+        onClick={onClick}
+        style={style}
+    >
+        {text}
+    </li>
+    )
+}
+{% endcodeblock %}
+
+{% codeblock %}
+// src/TodoList.js
+import React from 'react'
+
+import Todo from './Todo'
+
+const TodoList = ({todos, onTodoClick}) => (
+    <ul>
+        {todos.map((todo) => (
+            <Todo key={todo.id} {...todo} onClick={() => { onTodoClick(todo.id) }}/>
+        ))}
+    </ul>
+)
+export default TodoList
+{% endcodeblock %}
+
 ### 4.3 待办事项列表过滤
 
+待办事项有"完成"、"未完成"两种状态，在显示待办事项列表的时候，默认显示所有的待办事项，也可以进行过滤。如果用户点击"Active"链接，则显示"未完成"状态的待办事项，如果用户点击"Completed"链接，则显示"完成"状态的待办事项。
 
+由于有三个链接，所以先定义链接的组件。
 
+{% codeblock %}
+// src/Link.js
+import React from 'react'
+
+const Link = ({ active, children, onClick }) => {
+    if (active) {
+      return <span>{children}</span>
+    }
+    return (
+      <a
+        href=""
+        onClick={e => {
+          e.preventDefault()
+          onClick && onClick()
+        }}
+      >
+        {children}
+      </a>
+    )
+}
+
+export default Link
+{% endcodeblock %}
+
+把三个链接组合起来，我们定义一个Footer.js文件。
+
+{% codeblock %}
+import React from 'react';
+import Link from './Link'
+const Footer = () => (
+    <p>
+        Show:
+        <Link active={true}>ALL</Link>
+        &nbsp;&nbsp;
+        <Link active={false}>Active</Link>
+        &nbsp;&nbsp;
+        <Link active={false}>Completed</Link>
+    </p>
+)
+export default Footer
+{% endcodeblock %}
+
+### 4.4 组合起来
+
+上面几个小节，把几个模块的UI组件都定义好了。我们来修改app.js文件，把各个模块组合起来。
+
+{% codeblock %}
+// src/app.js
+import React, { Component } from 'react';
+
+import AddTodo from './AddTodo'
+import TodoList from './TodoList'
+import Footer from './Footer'
+
+// 模拟数据
+const data = [
+    {
+        id: '1',
+        text: '001',
+        completed: false,
+    },
+    {
+        id: '2',
+        text: '002',
+        completed: true,
+    },
+]
+
+class App extends Component {
+    constructor (props) {
+        super(props)
+        this.onTodoClick = this.onTodoClick.bind(this)
+    }
+    onTodoClick (id) {
+        console.log('@@@@todo click', id)
+    }
+    render() {
+        return (
+            <div>
+                <AddTodo />
+                <TodoList todos={data} onTodoClick={this.onTodoClick}/>
+                <Footer />
+            </div>
+        )
+    }
+}
+
+export default App
+{% endcodeblock %}
+
+```flow
+st=>start: Start|past:>http://www.google.com[blank]
+e=>end: End:>http://www.google.com
+op1=>operation: My Operation|past
+op2=>operation: Stuff|current
+sub1=>subroutine: My Subroutine|invalid
+cond=>condition: Yes
+or No?|approved:>http://www.google.com
+c2=>condition: Good idea|rejected
+io=>inputoutput: catch something...|request
+
+st->op1(right)->cond
+cond(yes, right)->c2
+cond(no)->sub1(left)->op1
+c2(yes)->io->e
+c2(no)->op2->e
+```
