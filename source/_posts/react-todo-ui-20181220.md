@@ -158,7 +158,7 @@ module.exports = {
 
 （2）支持es6、es7特性
 
-要让我们的代码支持es6、es7新特性。需要使用到webpack的loader功能，而能将es6、es7语法转换成浏览器支持到语法，就是"babel-loader"。要使用babel，我们需要线安装
+要让我们的代码支持es6、es7新特性。需要使用到webpack的loader功能，而能将es6、es7语法转换成浏览器支持的语法，就是"babel-loader"。要使用babel，我们需要先安装
 
 - babel : babel库
 - babel-loader：webpack用来加载babel的库
@@ -215,7 +215,7 @@ module.exports = {
 }
 {% endcodeblock %}
 
-配置好之后，如何启动devServer呢？首先，我们需要要安装"webpack-dev-server"这个npm包。
+配置好之后，如何启动devServer呢？首先，我们需要先安装"webpack-dev-server"这个npm包。
 
 {% codeblock %}
 // 确保当前处于项目根目录下再输入如下命令
@@ -257,6 +257,7 @@ ReactDOM.render(
 index.js是入口文件，会在body标签下渲染react组件<App />。组件App的代码如下（我们先搭一个架子）：
 
 {% codeblock %}
+// src/app.js
 import React, { Component } from 'react';
 class App extends Component {
     render() {
@@ -274,7 +275,7 @@ export default App
 
 ### 4.1 添加待办事项UI
 
-待办事项的添加，我们只需要一个input输入框和一个添加的按钮。我們使用函数定义组件来实现：
+待办事项的添加，我们只需要一个input输入框和一个添加的按钮。我們使用react的函数定义组件来实现：
 
 {% codeblock %}
 // src/AddTodo.js
@@ -441,4 +442,4 @@ graph TD;
 
 本文具体的代码可查看 {% link 这里 https://github.com/Two-Ftry/react-essay/tree/master/redux-02 %}。
 
-现在的前端项目搭建，已经会涉及到很多知识。从本文可以看到，开发一个简单的UI，从项目搭建开始，我们使用到了npm来初始化项目，然后使用webpack来搭建环境，接着再组合react。而在webpack中，我们也会涉及到额外的npm包，如html-webpack-plugin。丰富的工具让我们的开发变得简单高效，但是也增加了我们学习的成本。逐步积累，是不断进步的必经之路。
+现在的前端项目搭建，已经会涉及到很多知识。从本文可以看到，开发一个简单的UI，从项目搭建开始，我们使用到了npm来初始化项目，然后使用webpack来搭建环境，接着再组合react。而在webpack中，我们也会涉及到额外的npm包，如html-webpack-plugin、babel、babel-loader。丰富的工具让我们的开发变得简单高效，但是也增加了我们学习的成本。逐步积累，是不断进步的必经之路。
