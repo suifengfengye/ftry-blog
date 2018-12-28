@@ -12,3 +12,11 @@
     }());
 </script>
 <% } %>
+<% if (theme.mermaid.enable) { %>
+    <script src='https://cdn.bootcss.com/mermaid/<%= theme.mermaid.version %>/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        mermaid.initialize({theme: 'forest'});
+      }
+    </script>
+  <% } %>

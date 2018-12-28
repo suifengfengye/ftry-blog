@@ -423,20 +423,22 @@ class App extends Component {
 export default App
 {% endcodeblock %}
 
-```flow
-st=>start: Start|past:>http://www.google.com[blank]
-e=>end: End:>http://www.google.com
-op1=>operation: My Operation|past
-op2=>operation: Stuff|current
-sub1=>subroutine: My Subroutine|invalid
-cond=>condition: Yes
-or No?|approved:>http://www.google.com
-c2=>condition: Good idea|rejected
-io=>inputoutput: catch something...|request
+具体的结构图如下：
 
-st->op1(right)->cond
-cond(yes, right)->c2
-cond(no)->sub1(left)->op1
-c2(yes)->io->e
-c2(no)->op2->e
+```mermaid
+graph TD;
+    TodoApp-->AddTodo.js;
+    TodoApp-->TodoList.js;
+    TodoList.js-->Todo.js-1;
+    TodoList.js-->Todo.js...;
+    TodoApp-->Footer.js;
+    Footer.js-->Link.js-1;
+    Footer.js-->Link.js-2;
+    Footer.js-->Link.js-3;
 ```
+
+# 5 结语
+
+本文具体的代码可查看 {% link 这里 https://github.com/Two-Ftry/react-essay/tree/master/redux-02 %}。
+
+现在的前端项目搭建，已经会涉及到很多知识。从本文可以看到，开发一个简单的UI，从项目搭建开始，我们使用到了npm来初始化项目，然后使用webpack来搭建环境，接着再组合react。而在webpack中，我们也会涉及到额外的npm包，如html-webpack-plugin。丰富的工具让我们的开发变得简单高效，但是也增加了我们学习的成本。逐步积累，是不断进步的必经之路。

@@ -643,6 +643,13 @@ decode-uri-component@^0.2.0:
   resolved "http://r.tnpm.oa.com/decode-uri-component/download/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
   integrity sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=
 
+deep-assign@^2.0.0:
+  version "2.0.0"
+  resolved "http://r.tnpm.oa.com/deep-assign/download/deep-assign-2.0.0.tgz#ebe06b1f07f08dae597620e3dd1622f371a1c572"
+  integrity sha1-6+BrHwfwja5ZdiDj3RYi83GhxXI=
+  dependencies:
+    is-obj "^1.0.0"
+
 deep-extend@^0.6.0:
   version "0.6.0"
   resolved "http://r.tnpm.oa.com/deep-extend/download/deep-extend-0.6.0.tgz#c4fa7c95404a17a9c3e8ca7e1537312b736330ac"
@@ -1127,6 +1134,20 @@ hexo-deployer-git@^0.3.1:
     moment "^2.18.0"
     swig "^1.4.2"
 
+hexo-filter-flowchart@^1.0.4:
+  version "1.0.4"
+  resolved "http://r.tnpm.oa.com/hexo-filter-flowchart/download/hexo-filter-flowchart-1.0.4.tgz#5b213126a02771df260ed0d5c6e04613486f9ccf"
+  integrity sha1-WyExJqAncd8mDtDVxuBGE0hvnM8=
+  dependencies:
+    deep-assign "^2.0.0"
+
+hexo-filter-mermaid-diagrams@^1.0.5:
+  version "1.0.5"
+  resolved "http://r.tnpm.oa.com/hexo-filter-mermaid-diagrams/download/hexo-filter-mermaid-diagrams-1.0.5.tgz#1e32fc4e46eab90cf3a375b5c830a9f2aef1640f"
+  integrity sha1-HjL8TkbquQzzo3W1yDCp8q7xZA8=
+  dependencies:
+    deep-assign "^2.0.0"
+
 hexo-front-matter@^0.2.2:
   version "0.2.3"
   resolved "http://r.tnpm.oa.com/hexo-front-matter/download/hexo-front-matter-0.2.3.tgz#c7ca8ef420ea36bd85e8408a2e8c9bf49efa605e"
@@ -1514,6 +1535,11 @@ is-number@^4.0.0:
   version "4.0.0"
   resolved "http://r.tnpm.oa.com/is-number/download/is-number-4.0.0.tgz#0026e37f5454d73e356dfe6564699867c6a7f0ff"
   integrity sha1-ACbjf1RU1z41bf5lZGmYZ8an8P8=
+
+is-obj@^1.0.0:
+  version "1.0.1"
+  resolved "http://r.tnpm.oa.com/is-obj/download/is-obj-1.0.1.tgz#3e4729ac1f5fde025cd7d83a896dab9f4f67db0f"
+  integrity sha1-PkcprB9f3gJc19g6iW2rn09n2w8=
 
 is-plain-object@^2.0.1, is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   version "2.0.4"
