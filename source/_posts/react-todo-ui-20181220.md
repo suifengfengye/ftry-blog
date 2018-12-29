@@ -320,8 +320,8 @@ import Todo from './Todo'
 
 const TodoList = ({todos, onTodoClick}) => (
     <ul>
-        {todos.map((todo) => (
-            <Todo key={todo.id} {...todo} onClick={() => { onTodoClick(todo.id) }}/>
+        {todos.map((todo, index) => (
+            <Todo key={index} {...todo} onClick={() => { onTodoClick(index) }}/>
         ))}
     </ul>
 )
@@ -391,12 +391,10 @@ import Footer from './Footer'
 // 模拟数据
 const data = [
     {
-        id: '1',
         text: '001',
         completed: false,
     },
     {
-        id: '2',
         text: '002',
         completed: true,
     },
@@ -407,8 +405,8 @@ class App extends Component {
         super(props)
         this.onTodoClick = this.onTodoClick.bind(this)
     }
-    onTodoClick (id) {
-        console.log('@@@@todo click', id)
+    onTodoClick (index) {
+        console.log('@@@@todo click', index)
     }
     render() {
         return (
