@@ -1,5 +1,5 @@
 ---
-title: 初识redux
+title: redux(一)-初识redux
 date: 2018-12-01 14:29:09
 categories: 
 - redux
