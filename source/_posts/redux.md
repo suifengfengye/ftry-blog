@@ -197,4 +197,4 @@ store.dispatch(setVisibilityFilter('SHOW_COMPLETED'))
 上面的样例代码包含3个文件: actions.js、reducers.js以及index.js。样例代码依赖于redux npm包，并使用了一些es6语法，想要把代码跑起来，我们使用webpack对这几个文件进行打包处理，让它成为浏览器可加载解析的文件。具体请参考{% link redux-01 https://github.com/Two-Ftry/react-essay/tree/master/redux-01 %}，里面对构建步骤进行了详细的说明。
 
 
-{% asset_img ./redux/result-20181213.png %}
+![result](result-20181213.png)

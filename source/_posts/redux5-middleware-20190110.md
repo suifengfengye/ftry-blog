@@ -1,12 +1,12 @@
 ---
 title: redux(五)-中间件
-tags: redux
+tags: redux middleware
 date: 2019-01-08 18:01:33
 ---
 
 redux的生态中，提供了中间件（即middleware）的方式来增强redux。middleware是指可以被嵌入在框架接收请求到产生响应过程之中的代码。middleware的方式能够很好的对代码进行解耦，如此middleware就能够独立成一个个的功能模块，方便维护和升级。那在redux中是如何提供对middleware的支持呢？redux提供了applyMiddleware()方法来支持middleware。applyMiddleware()方法的实现思路，就是将这些middleware形成一个链表，当dispatch()一个action的时候，就逐个调用调用链表里的middlware。它看起来就像下面这样。
 
-
+![middleware](redux-middleware.png)
 
 实现的代码像下面这样：
 
@@ -73,10 +73,12 @@ const thunk = (store) => (next) => (action) => {
 export default thunk
 {% endcodeblock %}
 
-上面这段代码，仍然采用了redux middleware的实现模式来包装（即(store) => (next) => (action)）。在实现的内部，我们判断传递进来的action，如果不是一个function，那么就调用下一个middleware；如果是function，我们就执行这个action，并且把redux的dispatch()和getState()方法参数传入到这个action方法，到此调用链结束。在acion方法的内部，如果使用了dispatch()方法重新发起action，则会沿着middlewares的调用链表重新执行。一般dispatch一个function action，会像下面这样：
+上面这段代码，仍然采用了redux middleware的实现模式来包装（即(store) => (next) => (action)）。在实现的内部，我们判断传递进来的action，如果不是一个function，那么就调用下一个middleware；如果是function，我们就执行这个action，并且把redux的dispatch()和getState()方法参数传入到这个action方法，到此调用链结束。
+
+在acion生成方法的内部，如果使用了dispatch()方法重新发起action，则会沿着middlewares的调用链表重新执行。一般dispatch一个function action，会像下面这样：
 
 {% codeblock %}
-// 使用示意
+// 使用示意-action生成方法
 export function dispatchInitTodos() {
   return (dispatch) => {
     getTodos().then((data) => {
@@ -87,6 +89,7 @@ export function dispatchInitTodos() {
     })
   }
 }
+store.dispatch(dispatchInitTodos())
 {% endcodeblock %}
 
 # 3、promise middleware
@@ -103,13 +106,13 @@ function dispatchPromise(){
 
 如上述代码，我们dispatch一个Promise，这个Promise对象在创建出来的时候，就已经开始执行内部的逻辑了。这和function还是不一样的，function定义出来之后，可以延后执行，所以我们可以在middleware的实现中调用function。
 
-所以在promise middleware的时候，思路是将Promise的resolved（或者rejected）的值作为一个action，重新使用store.dispatch()方法来发起这个action。
+所以在实现promise middleware的时候，思路是将Promise的resolved（或者rejected）的值作为一个action，重新使用store.dispatch()方法来发起这个action。
 
 {% codeblock %}
 // middlewares/promise.js
 const promise = (store) => (next) => (action) => {
     // 抽取一个dispatch的方法
-    // 支持派发多个actions
+    // 支持派发多个action
     const dispatchInnerAction = (data) => {
         if (Array.isArray(data)) {
             data.forEach(item => {
@@ -133,7 +136,7 @@ const promise = (store) => (next) => (action) => {
 export default promise
 {% endcodeblock %}
 
-上述这段代码，当action.then为一个function的时候，我们就断定这个action为一个Promise对象。我们调用action.then()方法来获取这个Promises对象的resolved值（或者rejected值）。当然，这里resolved值（或者rejected值）要求必须为一个action。为了支持多个action，对resolved值（或者rejected值）进行来判断，如果是一个数组，逐个遍历并dispatch，否则直接dispatch。
+上述这段代码，当action.then为一个function的时候，我们就断定这个action为一个Promise对象。我们调用action.then()方法来获取这个Promises对象的resolved值（或者rejected值）。**当然，这里resolved值（或者rejected值）要求必须为一个action。**为了支持多个action，对resolved值（或者rejected值）进行了判断，如果是一个数组，逐个遍历并dispatch，否则直接dispatch。
 
 Promise action的生成函数大体如下：
 
