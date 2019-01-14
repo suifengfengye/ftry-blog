@@ -161,7 +161,7 @@ export function dispatchInitTodosPromise(){
 
 上述代码，getTodos()方法本身返回了一个Promise，我们调用getTodos().then()后传递给middleware的依然是一个Promise，并且使用 return initTodos(...)的形式resolved了一个action。在promise middleware中，这个resolved了的action会使用store.dispatch()方法发起。
 
-＃ 4、结语
+# 4、结语
 
 本文我们学习了redux middleware的实现机制，同时举了几个例子来编写自定义的middleware。如果不明白，可以到redux的官方文档中，查看 {% link middlewares https://redux.js.org/advanced/middleware %} 这篇教程，里面很详尽地道出了middleware的演进思路。不过这篇文章中举的两个例子，logger和crashReporter，虽然简单易懂，但是代表性不是特别强，做好自己动手实现一个简单的redux-thunk和redux-promise，对于redux middleware的理解将会更加深入。
 
