@@ -98,11 +98,32 @@ pip3 install django
 ```shell
 mkdir /www
 cd /www
-django-admin.py startproject demosite
+# 这里需要注意django-admin.py的位置，当提示命令不存在时，使用find命令全局查找一下
+# find / -name "*django-admin.py*"
+/usr/local/python3/bin/django-admin.py startproject demosite
 cd demosite
 python3 manage.py runserver 0.0.0.0:8002
 ```
-在浏览器内输入：http://127.0.0.1:8002 ,检查django是否运行正常。
+启动成功，在浏览器内输入：http://127.0.0.1:8002 ,检查django是否运行正常。
+
+不过，如果报错"ModuleNotFoundError: No module named '_sqlite3'"。我们还是要忍着处理一下（毕竟这么多步骤下来，挨了不少坑了）。这里网上很多的答案是去"yum install sqlite-devel",然后再次编译python3。但是你这么做之后，启动django发现它报错提示说要求3.8及以上的版本。所以这里我们一步到位地解决掉它，我们直接安装高级版本的sqlite3。
+
+```shell
+cd ~
+wget https://www.sqlite.org/2019/sqlite-autoconf-3290000.tar.gz
+# 解压
+tar zxvf sqlite-autoconf-3290000.tar.gz
+cd sqlite-autoconf-3290000
+./configure --prefix=/usr/local/sqlite3 --disable-static --enable-fts5 --enable-json1 CFLAGS="-g -O2 -DSQLITE_ENABLE_FTS3=1 -DSQLITE_ENABLE_FTS4=1 -DSQLITE_ENABLE_RTREE=1"
+```
+
+对Python3.7再进行编译：
+```
+cd ~/Python-3.7.0
+LD_RUN_PATH=/usr/local/sqlite3/lib ./configure --prefix=/usr/local/python3 --enable-optimizations LDFLAGS="-L/usr/local/sqlite3/lib" CPPFLAGS="-I /usr/local/sqlite3/include" 
+LD_RUN_PATH=/usr/local/sqlite3/lib make
+LD_RUN_PATH=/usr/local/sqlite3/lib make install
+```
 
 # 4、nginx安装
 
