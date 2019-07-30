@@ -115,6 +115,7 @@ wget https://www.sqlite.org/2019/sqlite-autoconf-3290000.tar.gz
 tar zxvf sqlite-autoconf-3290000.tar.gz
 cd sqlite-autoconf-3290000
 ./configure --prefix=/usr/local/sqlite3 --disable-static --enable-fts5 --enable-json1 CFLAGS="-g -O2 -DSQLITE_ENABLE_FTS3=1 -DSQLITE_ENABLE_FTS4=1 -DSQLITE_ENABLE_RTREE=1"
+make && make install
 ```
 
 对Python3.7再进行编译：
@@ -125,6 +126,16 @@ LD_RUN_PATH=/usr/local/sqlite3/lib make
 LD_RUN_PATH=/usr/local/sqlite3/lib make install
 ```
 
+检查是否安装成功：
+![sqlite3-success](sqlite3.png)
+
+成功后，在去启动demosite，应该就没问题啦。
+
+```
+cd /www/demosite
+python3 manage.py runserver 0.0.0.0:8002
+```
+
 # 4、nginx安装
 
 ```shell
@@ -132,12 +143,18 @@ cd ~
 wget http://nginx.org/download/nginx-1.9.9.tar.gz 
 tar xzvf nginx-1.9.9.tar.gz 
 cd nginx-1.9.9
-# 配置（制定安装目录）
+# 配置（指定安装目录）
 ./configure --prefix=/usr/local/nginx-1.9.9 --with-http_stub_status_module  --with-http_gzip_static_module
 make && make install
+# 检查是否成功
+/usr/local/nginx-1.9.9/sbin/nginx -V
+# 建立软连接
+ln -s /usr/local/nginx-1.9.9/sbin/nginx /usr/bin/nginx
 ```
 
-##（1）uwsgi配置
+## （1）uwsgi配置
+
+在/etc目录下创建uwsgi9090.ini文件，输入如下内容：
 
 ```shell
 [uwsgi]
@@ -151,9 +168,13 @@ vacuum = true         #退出、重启时清理文件
 max-requests = 1000   
 limit-as = 512
 buffer-size = 30000
+pythonpath = /usr/local/python3/lib/python3.7/site-packages
 pidfile = /var/run/uwsgi9090.pid    #pid文件，用于下面的脚本启动、停止该进程
 daemonize = /www/uwsgi9090.log
 ```
+
+PS:注意上面pythonpath的配置，很多网上的文章没有这个，所以我们的环境里面有python2和python3的时候，uwsgi启动就默认找python2下面的django，所以会出现找不到django的问题"ModuleNotFoundError: No module named 'django'"。
+
 ## (2) Nginx配置
 
 找到nginx的安装目录（如：/usr/local/nginx/），打开conf/nginx.conf文件，修改server配置：
@@ -178,4 +199,28 @@ server {
 ```shell
 uwsgi --ini /etc/uwsgi9090.ini & /usr/local/nginx/sbin/nginx
 ```
-浏览器输入：http://127.0.0.1，你就可以看到 django 的 "It work" 了。
+浏览器输入：http://127.0.0.1，你就可以看到 django 的界面了。如下：
+
+![django-success](django-success.png)
+
+
+## (3)、补充
+
+在弄环境的过程中，难免会遇到问题，所以对服务的启动停止也很正常，补充一些命令
+
+```shell
+# nginx 检查配置文件是否正确
+nginx -t
+# 重启nginx
+nginx -s reload
+```
+
+```shell
+# 停止uwsgi
+uwsgi3 --stop /var/run/uwsgi9090.pid
+```
+
+# 5、参考文章
+1. 【Django Nginx+uwsgi 安装配置】 https://www.runoob.com/django/django-nginx-uwsgi.html
+2. 【Centos 7升级原python 2.7.5至Python 3.7】 https://blog.51cto.com/10316297/2134736?from=timeline
+3. 【Python3以上版本安装sqlite3的解决方案】 https://www.jianshu.com/p/4b5ba514e0a4
