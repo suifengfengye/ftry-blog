@@ -1088,9 +1088,9 @@ has-values@^1.0.0:
     is-number "^3.0.0"
     kind-of "^4.0.0"
 
-hexo-asset-image@^0.0.3:
+hexo-asset-image@0.0.3:
   version "0.0.3"
-  resolved "http://r.tnpm.oa.com/hexo-asset-image/download/hexo-asset-image-0.0.3.tgz#88e9515673812f0106d73fe0acedd944f8a8a651"
+  resolved "https://registry.yarnpkg.com/hexo-asset-image/-/hexo-asset-image-0.0.3.tgz#88e9515673812f0106d73fe0acedd944f8a8a651"
   integrity sha1-iOlRVnOBLwEG1z/grO3ZRPioplE=
   dependencies:
     cheerio "^0.19.0"
@@ -1306,9 +1306,9 @@ hexo@^3.7.0:
     warehouse "^2.2.0"
 
 highlight.js@^9.4.0:
-  version "9.13.1"
-  resolved "http://r.tnpm.oa.com/highlight.js/download/highlight.js-9.13.1.tgz#054586d53a6863311168488a0f58d6c505ce641e"
-  integrity sha1-BUWG1TpoYzERaEiKD1jWxQXOZB4=
+  version "9.18.5"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.18.5.tgz#d18a359867f378c138d6819edfc2a8acd5f29825"
+  integrity sha512-a5bFyofd/BHCX52/8i8uJkjr9DYwXIPnM/plwI6W7ezItLGqzt7X2G2nXuYSfsIJdkwwj/g9DG1LkcGJI/dDoA==
 
 html-entities@^1.2.0:
   version "1.2.1"
